@@ -3,7 +3,7 @@ import Button from '../UI/Button';
 import Card from '../UI/Card';
 import styles from './AddUser.module.css'
 
-const AddUser = () => {
+const AddUser = (props) => {
     const [enteredUsername,setEnterendUsename]=useState('');
     const [enteredAge,setEnterendAge]=useState('');
     const addUserHandler=(event)=>{
@@ -14,7 +14,10 @@ const AddUser = () => {
         if(+enteredAge <1){ //this enterAge Was strin but this + made it number
             return ;
         }
-        console.log(enteredAge,enteredUsername)
+        // console.log(enteredAge,enteredUsername)
+        
+        props.onAddUser(enteredUsername,enteredAge);
+
         setEnterendUsename('');
         setEnterendAge('');
     }
