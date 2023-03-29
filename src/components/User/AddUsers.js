@@ -7,13 +7,23 @@ import styles from './AddUser.module.css'
 const AddUser = (props) => {
     const [enteredUsername,setEnterendUsename]=useState('');
     const [enteredAge,setEnterendAge]=useState('');
+    
+    const [error,setError]=useState();
+
     const addUserHandler=(event)=>{
         event.preventDefault();
         if(enteredUsername.trim().length === 0 || enteredAge.trim().length === 0){
-            
+            setError({
+                title:'Invalid input',
+                message:'please Enter valid Name and Age'
+            })
             return;
         }
         if(+enteredAge <1){ //this enterAge Was strin but this + made it number
+            setError({
+                title:'Invalid Age',
+                message:'please Enter valid Age'
+            })
             return ;
         }
         // console.log(enteredAge,enteredUsername)
@@ -31,9 +41,13 @@ const AddUser = (props) => {
         setEnterendAge(event.target.value);
     }
 
+    const errorHandler=()=>{
+        setError(null);
+    }
+
     return (
     <div>
-    <ErrorModal/>
+    {error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler} />}
     <Card className={styles.input} >
         <form onSubmit={addUserHandler}>
             <label htmlFor='username'>Username</label>
