@@ -19,7 +19,7 @@ const ErrorModal = (props) => {
             <Button onClick={props.onConfirm}>Okay</Button>
         </footer>
     </Card>
-    </Fragment>
+    </Fragment> 
   )
 }
 
